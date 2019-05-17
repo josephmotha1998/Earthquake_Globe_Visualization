@@ -85,7 +85,7 @@ function draw(){
 	translate(width/2,height/2);
 	imageMode(CENTER);
 	image(mapimg,0,0);
-	a = a + 0.04;
+	a = a + 0.06;
   	s = cos(a) * 1.1;
 
 	for(var i=0;i<circles.length;i++){	
