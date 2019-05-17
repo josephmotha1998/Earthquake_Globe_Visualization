@@ -1,3 +1,4 @@
+
 var mapimg;
 
 var clat=0;
@@ -12,12 +13,13 @@ var zoom=1;
 var earthquakes;
 var circles=[];
 
+let a = 0.0;
+let s = 0.0;
 
 
 function preload(){
 	mapimg=loadImage('https://api.mapbox.com/styles/v1/mapbox/dark-v9/static/0,0,1,0,0/1024x512?access_token=pk.eyJ1Ijoiam9zZXBoLW1vdGhhIiwiYSI6ImNqdnBrNDRydDBzb3k0YW8xZjltM2dyaTIifQ.P5svPmWFy5gltpYhu2zaJA');
-	// earthquakes=loadStrings("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.csv");
-	earthquakes=loadStrings("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.csv");
+	earthquakes=loadStrings("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_week.csv");
 
 
 }
@@ -60,7 +62,7 @@ function setup(){
 		var x=mercX(lon)-cx;
 		var y=mercY(lat)-cy;
 
-		mag=pow(10,mag);
+		mag=pow(mag,10);
 		mag=sqrt(mag);
 
 		var magmax=sqrt(pow(10,10));
@@ -68,18 +70,34 @@ function setup(){
 		var d=map(mag,0,magmax,0,180);
 		stroke(255,0,255);
 		fill(255,0,255,200);
-		
-		circles[i]=ellipse(x,y,d,d);
+		temp=new Circle();
+		temp.x=x;
+		temp.y=y;
+		temp.d=d;
+		temp.draw();
+		circles[i]=temp;
+		console.log(circles[i].x,circles[i].y);
+
 	}
 
 
-	for(var i=0;i<earthquakes.length;i++){
+}
 
-	}
+function draw(){
+	rectMode(CENTER);
+	imageMode(CENTER);
+	image(mapimg,1024/2,512/2);
 
-	
-
-
+	// for(var i=0;i<circles.length;i++){
+		a = a + 0.02;
+  		s = cos(a) * 2;
+		translate(circles[1].x,circles[1].y);
+		ellipse(circles[1].x,circles[1].x,circles[1].d,circles[1].d);
+		console.log(circles[1].x,circles[1].y);
+  		scale(s);
+  		fill(255,0,255,200);
+  		circles[0].draw1();
+	// }
 
 }
 
