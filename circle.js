@@ -8,6 +8,6 @@ function Circle(){
 		ellipse(this.x,this.y,this.d,this.d);
 	}
 	this.draw1=function (){
-		ellipse(0,0,32,32);
+		ellipse(0,0,this.d,this.d);
 	}
 }

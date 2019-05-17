@@ -19,7 +19,7 @@ let s = 0.0;
 
 function preload(){
 	mapimg=loadImage('https://api.mapbox.com/styles/v1/mapbox/dark-v9/static/0,0,1,0,0/1024x512?access_token=pk.eyJ1Ijoiam9zZXBoLW1vdGhhIiwiYSI6ImNqdnBrNDRydDBzb3k0YW8xZjltM2dyaTIifQ.P5svPmWFy5gltpYhu2zaJA');
-	earthquakes=loadStrings("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_week.csv");
+	earthquakes=loadStrings("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_month.csv");
 
 
 }
@@ -76,28 +76,27 @@ function setup(){
 		temp.d=d;
 		temp.draw();
 		circles[i]=temp;
-		console.log(circles[i].x,circles[i].y);
 
-	}
-
-
+	}	
 }
 
 function draw(){
-	rectMode(CENTER);
-	imageMode(CENTER);
-	image(mapimg,1024/2,512/2);
 
-	// for(var i=0;i<circles.length;i++){
-		a = a + 0.02;
-  		s = cos(a) * 2;
-		translate(circles[1].x,circles[1].y);
-		ellipse(circles[1].x,circles[1].x,circles[1].d,circles[1].d);
-		console.log(circles[1].x,circles[1].y);
+	translate(width/2,height/2);
+	imageMode(CENTER);
+	image(mapimg,0,0);
+	a = a + 0.04;
+  	s = cos(a) * 1.1;
+
+	for(var i=0;i<circles.length;i++){	
+		push();	
+		translate(circles[i].x,circles[i].y);
   		scale(s);
   		fill(255,0,255,200);
-  		circles[0].draw1();
-	// }
+  		circles[i].draw1();
+  		pop();
+
+	}
 
 }
 
